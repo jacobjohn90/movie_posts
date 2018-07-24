@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_24_190755) do
+ActiveRecord::Schema.define(version: 2018_07_24_212754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_comments_on_movie_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.string "mpaa_rating"
+    t.string "img"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +64,6 @@ ActiveRecord::Schema.define(version: 2018_07_24_190755) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "movies"
+  add_foreign_key "comments", "users"
 end
