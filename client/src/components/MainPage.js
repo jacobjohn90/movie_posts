@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 class MainPage extends Component {
+    state = {
+        signedIn: false
+    }
+
+    updateSignedIn = () => {
+        this.setState({signedIn: true})
+    }
+
     render() {
         return (
             <div>
-                <SignUp />
+                <SignUp updateSignedIn={this.updateSignedIn}/>
+                <SignIn updateSignedIn={this.updateSignedIn} />
             </div>
         );
     }

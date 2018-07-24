@@ -1,34 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class SignUp extends Component {
-
+class SignIn extends Component {
+    
     state = {
         email: '',
-        password: '',
-        password_confirmation: ''
+        password: ''
     }
 
     onChange = (event) => {
-        const newState = { ...this.state }
+        const newState = {...this.state}
         newState[event.target.name] = event.target.value
         this.setState(newState)
     }
-    signUp = async (event) => {
+    
+    signIn = async(event) => {
         event.preventDefault()
-        try {
-            await axios.post('/auth', this.state)
-            this.props.updateSignedIn()
-
-        } catch (error) {
+        this.props.updateSignedIn()
+        try{
+            await axios.post('auth/sign_in', this.state)
+            
+        } catch (error){
             console.error(error)
         }
     }
-
+    
+    
+    
     render() {
         return (
             <div>
-                <form onSubmit={this.signUp}>
+                <form onSubmit={this.signIn}>
                     <div>
                         <label htmlFor="email">E-mail: </label>
                         <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
@@ -37,15 +39,12 @@ class SignUp extends Component {
                         <label htmlFor="password">Password: </label>
                         <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
                     </div>
-                    <div>
-                        <label htmlFor="password_confirmation">Confirm Password: </label>
-                        <input onChange={this.onChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
-                    </div>
-                    <button type="submit">Sign Up</button>
+
+                    <button type="submit">Sign In</button>
                 </form>
             </div>
         );
     }
 }
 
-export default SignUp;
+export default SignIn;
