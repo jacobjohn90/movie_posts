@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
+import { setAxiosDefaults } from '../util/SessionHeaderUtil';
 
 class Movie extends Component {
 
@@ -25,6 +26,7 @@ class Movie extends Component {
 
     fetchComments = async () => {
         const movieId = this.props.match.params.id
+        setAxiosDefaults()
         const res = await Axios.get(`/api/movies/${movieId}/comments`)
         return res.data
     }
@@ -32,8 +34,9 @@ class Movie extends Component {
     deleteComment = async(commentId) => {
         const movieId = this.props.match.params.id
         try{
+            setAxiosDefaults()
             await Axios.delete(`/api/movies/${movieId}/comments/${commentId}`)
-            const comments = this.fetchComments()
+            const comments = await this.fetchComments()
             this.setState({comments})
         } catch (error) {
             console.error(error)
@@ -50,6 +53,7 @@ class Movie extends Component {
                 </div>
             )
         })
+        
         return (
             <div>
                 <div>

@@ -8,13 +8,15 @@ import Axios from '../../node_modules/axios';
 class MainPage extends Component {
     state = {
         signedIn: false,
+        currentUserEmail: '',
         currentUserId: ''
     }
 
     componentDidMount() {
         const signedIn = userIsLoggedIn()
         if (signedIn) {
-            setAxiosDefaults()
+            this.fetchCurrentUserEmail()
+            this.fetchCurrentUserId()
         }
         this.setState({ signedIn })
     }
@@ -23,8 +25,18 @@ class MainPage extends Component {
         this.setState({ signedIn: true })
     }
 
-    updateCurrentUserId = (currentUserId) => {
-        this.setState({currentUserId})
+    fetchCurrentUserEmail = ()=> {
+        const currentUserEmail = localStorage.getItem("uid")
+        console.log('running fetching current email')
+        this.setState({currentUserEmail}); 
+    }
+    
+    fetchCurrentUserId = async() => {
+        setAxiosDefaults()
+        const allUsers = await Axios.get('/api/users')
+        console.log(allUsers.data)
+        const currentUser = await allUsers.data.find((user) => user.email === this.state.currentUserEmail)
+        this.setState({currentUserId: currentUser.id})
     }
 
     signOut = async (event) => {
@@ -39,17 +51,21 @@ class MainPage extends Component {
     }
 
     render() {
+        const userId = this.state.currentUserId
         return (
             <div>
                 {this.state.signedIn
                     ?
                     <div>
+                        <a href={`/user/${userId}`}>
+                            <button>User Profile</button>
+                        </a>
                         <button onClick={this.signOut}>Sign Out</button>
                     </div>
                     :
                     <div>
                         <SignUp updateSignedIn={this.updateSignedIn} />
-                        <SignIn updateSignedIn={this.updateSignedIn} updateCurrentUserId={this.updateCurrentUserId} />
+                        <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId}/>
                     </div>
                 }
                 <Movies />
