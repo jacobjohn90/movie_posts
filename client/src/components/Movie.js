@@ -19,20 +19,20 @@ class Movie extends Component {
     }
 
     fetchMovie = async () => {
-        const movieId = this.props.match.params.id
+        const movieId = this.props.match.params.movie_id
         const res = await Axios.get(`/api/movies/${movieId}`)
         return res.data
     }
 
     fetchComments = async () => {
-        const movieId = this.props.match.params.id
+        const movieId = this.props.match.params.movie_id
         setAxiosDefaults()
         const res = await Axios.get(`/api/movies/${movieId}/comments`)
         return res.data
     }
 
     deleteComment = async(commentId) => {
-        const movieId = this.props.match.params.id
+        const movieId = this.props.match.params.movie_id
         try{
             setAxiosDefaults()
             await Axios.delete(`/api/movies/${movieId}/comments/${commentId}`)

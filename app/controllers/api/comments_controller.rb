@@ -3,8 +3,15 @@ class Api::CommentsController < ApplicationController
     load_and_authorize_resource only: [:destroy]
 
     def index
-        @comments = Comment.all
-        render json: @comments
+        if params[:movie_id]
+            @movie = Movie.find(params[:movie_id])
+            @comments = @movie.comments
+            render json: @comments
+        else
+            @user = User.find(params[:user_id])
+            @comments = @user.comments
+            render json: @comments
+        end
     end
 
     def show

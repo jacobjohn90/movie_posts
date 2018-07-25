@@ -12,8 +12,8 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/user/:id" component={UserPage} />
-            <Route exact path="/:id" component={Movie} />
+            <Route exact path="/user/:user_id" component={UserPage} />
+            <Route exact path="/:movie_id" component={Movie} />
           </Switch>
         </div>
       </Router>
