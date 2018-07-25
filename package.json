@@ -1,5 +1,5 @@
 {
-    "name": "Movie Posts",
+    "name": "Comment Reel",
     "engines": {
         "node": "9.9.0"
     },
