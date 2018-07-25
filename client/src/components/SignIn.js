@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { saveAuthTokens } from '../util/SessionHeaderUtil';
 
 class SignIn extends Component {
     
@@ -16,10 +17,10 @@ class SignIn extends Component {
     
     signIn = async(event) => {
         event.preventDefault()
-        this.props.updateSignedIn()
         try{
-            await axios.post('auth/sign_in', this.state)
-            
+            const res = await axios.post('auth/sign_in', this.state)
+            saveAuthTokens(res.headers)
+            this.props.updateSignedIn()
         } catch (error){
             console.error(error)
         }
