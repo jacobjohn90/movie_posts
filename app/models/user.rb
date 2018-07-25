@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
   has_many :comments, dependent: :destroy
+  has_many :movies, through: :comments
 end

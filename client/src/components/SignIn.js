@@ -20,6 +20,8 @@ class SignIn extends Component {
         try{
             const res = await axios.post('auth/sign_in', this.state)
             saveAuthTokens(res.headers)
+            // console.log(res.data.data)
+            this.props.updateCurrentUserId(res.data.data.id)
             this.props.updateSignedIn()
         } catch (error){
             console.error(error)

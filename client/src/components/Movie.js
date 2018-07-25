@@ -29,12 +29,24 @@ class Movie extends Component {
         return res.data
     }
 
+    deleteComment = async(commentId) => {
+        const movieId = this.props.match.params.id
+        try{
+            await Axios.delete(`/api/movies/${movieId}/comments/${commentId}`)
+            const comments = this.fetchComments()
+            this.setState({comments})
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     render() {
         const movie = this.state.movie
         const commentList = this.state.comments.map((comment) => {
             return (
                 <div key={comment.id}>
                     <p>{comment.content}</p>
+                    <button onClick={()=>this.deleteComment(comment.id)}>Delete Comment</button>
                 </div>
             )
         })

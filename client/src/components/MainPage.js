@@ -7,7 +7,8 @@ import Axios from '../../node_modules/axios';
 
 class MainPage extends Component {
     state = {
-        signedIn: false
+        signedIn: false,
+        currentUserId: ''
     }
 
     componentDidMount() {
@@ -20,6 +21,10 @@ class MainPage extends Component {
 
     updateSignedIn = () => {
         this.setState({ signedIn: true })
+    }
+
+    updateCurrentUserId = (currentUserId) => {
+        this.setState({currentUserId})
     }
 
     signOut = async (event) => {
@@ -38,11 +43,13 @@ class MainPage extends Component {
             <div>
                 {this.state.signedIn
                     ?
-                    <button onClick={this.signOut}>Sign Out</button>
+                    <div>
+                        <button onClick={this.signOut}>Sign Out</button>
+                    </div>
                     :
                     <div>
                         <SignUp updateSignedIn={this.updateSignedIn} />
-                        <SignIn updateSignedIn={this.updateSignedIn} />
+                        <SignIn updateSignedIn={this.updateSignedIn} updateCurrentUserId={this.updateCurrentUserId} />
                     </div>
                 }
                 <Movies />

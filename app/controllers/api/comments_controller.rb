@@ -1,4 +1,7 @@
 class Api::CommentsController < ApplicationController
+    before_action :authenticate_user!, except: [:show, :index]
+    load_and_authorize_resource only: [:destroy]
+
     def index
         @comments = Comment.all
         render json: @comments
@@ -22,6 +25,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def destroy
+        @user = current_user
         @comment = Comment.find(params[:id])
         @comment.destroy
         render status: :ok
