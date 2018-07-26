@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
 
 class Movie extends Component {
 
     state = {
         movie: {},
-        comments: []
+        comments: [],
+        currentUserEmail: '',
+        currentUserId: ''
     }
 
     async componentDidMount() {
@@ -14,7 +17,9 @@ class Movie extends Component {
         let comments = []
         movie = await this.fetchMovie()
         comments = await this.fetchComments()
-        this.setState({ movie, comments })
+        const currentUserEmail = await fetchCurrentUserEmail()
+        this.setState({ movie, comments, currentUserEmail })
+        this.fetchCurrentUserId()
     }
 
     fetchMovie = async () => {
@@ -29,14 +34,19 @@ class Movie extends Component {
         const res = await Axios.get(`/api/movies/${movieId}/comments`)
         return res.data
     }
+    fetchCurrentUserId = async () => {
+        const users = await fetchUsers()
+        const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
+        this.setState({ currentUserId: currentUser.id })
+    }
 
-    deleteComment = async(commentId) => {
+    deleteComment = async (commentId) => {
         const movieId = this.props.match.params.movie_id
-        try{
+        try {
             setAxiosDefaults()
             await Axios.delete(`/api/movies/${movieId}/comments/${commentId}`)
             const comments = await this.fetchComments()
-            this.setState({comments})
+            this.setState({ comments })
         } catch (error) {
             console.error(error)
         }
@@ -48,11 +58,18 @@ class Movie extends Component {
             return (
                 <div key={comment.id}>
                     <p>{comment.content}</p>
-                    <button onClick={()=>this.deleteComment(comment.id)}>Delete Comment</button>
+                    {this.state.currentUserId == comment.user_id
+                        ?
+                        <div>
+                            <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
+                        </div>
+                        :
+                        null
+                    }
                 </div>
             )
         })
-        
+
         return (
             <div>
                 <div>

@@ -6,7 +6,7 @@ export function fetchCurrentUserEmail() {
     return currentUserEmail
 }
 
-export async function fetchCurrentUserId() {
+export async function fetchUsers() {
     setAxiosDefaults()
     const allUsers = await axios.get('/api/users')
     return allUsers.data

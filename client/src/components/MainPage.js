@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Movies from './Movies';
-import { userIsLoggedIn, setAxiosDefaults, clearAuthTokens } from '../util/SessionHeaderUtil';
+import { userIsLoggedIn, clearAuthTokens } from '../util/SessionHeaderUtil';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { fetchCurrentUserEmail, fetchCurrentUserId } from '../util/FetchCurrentUser';
+import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
 
 class MainPage extends Component {
     state = {
@@ -40,8 +40,8 @@ class MainPage extends Component {
         }
     }
 
-    fetchCurrentUser = async()=> {
-        const users = await fetchCurrentUserId()
+    fetchCurrentUserId = async()=> {
+        const users = await fetchUsers()
         const currentUser = users.find((user)=> user.email === this.state.currentUserEmail)
         this.setState({currentUserId: currentUser.id})
     }
