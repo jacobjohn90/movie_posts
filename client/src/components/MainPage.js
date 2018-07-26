@@ -19,8 +19,7 @@ class MainPage extends Component {
         if (signedIn) {
             const currentUserEmail = await fetchCurrentUserEmail()
             this.setState({ currentUserEmail })
-            this.fetchCurrentUser()
-
+            this.fetchCurrentUserId()
         }
         this.setState({ signedIn })
     }

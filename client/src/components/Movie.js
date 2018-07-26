@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
-import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
+import NewComment from './NewComment';
 
 class Movie extends Component {
 
@@ -9,7 +10,8 @@ class Movie extends Component {
         movie: {},
         comments: [],
         currentUserEmail: '',
-        currentUserId: ''
+        currentUserId: '',
+        signedIn: ''
     }
 
     async componentDidMount() {
@@ -18,7 +20,8 @@ class Movie extends Component {
         movie = await this.fetchMovie()
         comments = await this.fetchComments()
         const currentUserEmail = await fetchCurrentUserEmail()
-        this.setState({ movie, comments, currentUserEmail })
+        const signedIn = await userIsLoggedIn()
+        this.setState({ movie, comments, currentUserEmail, signedIn })
         this.fetchCurrentUserId()
     }
 
@@ -80,6 +83,12 @@ class Movie extends Component {
                 <div>
                     <h2>Comments about this Movie</h2>
                     {commentList}
+                    {this.state.signedIn
+                        ?
+                        <NewComment />
+                        :
+                        null
+                    }
                 </div>
             </div>
         );
