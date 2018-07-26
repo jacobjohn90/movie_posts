@@ -4,6 +4,7 @@ import './App.css';
 import MainPage from './components/MainPage';
 import Movie from './components/Movie';
 import UserPage from './components/UserPage';
+import Nav from './components/Nav';
 
 class App extends Component {
 
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Nav />
           <Switch>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/user/:user_id" component={UserPage} />
