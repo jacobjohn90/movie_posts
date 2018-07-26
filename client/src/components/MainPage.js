@@ -3,7 +3,9 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Movies from './Movies';
 import { userIsLoggedIn, setAxiosDefaults, clearAuthTokens } from '../util/SessionHeaderUtil';
-import Axios from '../../node_modules/axios';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { fetchCurrentUserEmail, fetchCurrentUserId } from '../util/FetchCurrentUser';
 
 class MainPage extends Component {
     state = {
@@ -12,11 +14,13 @@ class MainPage extends Component {
         currentUserId: ''
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const signedIn = userIsLoggedIn()
         if (signedIn) {
-            this.fetchCurrentUserEmail()
-            this.fetchCurrentUserId()
+            const currentUserEmail = await fetchCurrentUserEmail()
+            this.setState({ currentUserEmail })
+            this.fetchCurrentUser()
+
         }
         this.setState({ signedIn })
     }
@@ -25,29 +29,21 @@ class MainPage extends Component {
         this.setState({ signedIn: true })
     }
 
-    fetchCurrentUserEmail = ()=> {
-        const currentUserEmail = localStorage.getItem("uid")
-        console.log('running fetching current email')
-        this.setState({currentUserEmail}); 
-    }
-    
-    fetchCurrentUserId = async() => {
-        setAxiosDefaults()
-        const allUsers = await Axios.get('/api/users')
-        console.log(allUsers.data)
-        const currentUser = await allUsers.data.find((user) => user.email === this.state.currentUserEmail)
-        this.setState({currentUserId: currentUser.id})
-    }
-
     signOut = async (event) => {
         event.preventDefault()
         try {
-            await Axios.delete('/auth/sign_out')
+            await axios.delete('/auth/sign_out')
             clearAuthTokens()
             this.setState({ signedIn: false })
         } catch (error) {
             console.error(error)
         }
+    }
+
+    fetchCurrentUser = async()=> {
+        const users = await fetchCurrentUserId()
+        const currentUser = users.find((user)=> user.email === this.state.currentUserEmail)
+        this.setState({currentUserId: currentUser.id})
     }
 
     render() {
@@ -57,18 +53,18 @@ class MainPage extends Component {
                 {this.state.signedIn
                     ?
                     <div>
-                        <a href={`/user/${userId}`}>
+                        <Link to={`/user/${userId}`}>
                             <button>User Profile</button>
-                        </a>
+                        </Link>
                         <button onClick={this.signOut}>Sign Out</button>
                     </div>
                     :
                     <div>
                         <SignUp updateSignedIn={this.updateSignedIn} />
-                        <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId}/>
+                        <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId} />
                     </div>
                 }
-                <Movies />
+                <Movies currentUserId={this.state.currentUserId} />
             </div>
         );
     }

@@ -15,7 +15,6 @@ class Movie extends Component {
         movie = await this.fetchMovie()
         comments = await this.fetchComments()
         this.setState({ movie, comments })
-
     }
 
     fetchMovie = async () => {

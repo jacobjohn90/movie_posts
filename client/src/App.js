@@ -6,7 +6,9 @@ import Movie from './components/Movie';
 import UserPage from './components/UserPage';
 
 class App extends Component {
+
   render() {
+
     return (
       <Router>
         <div>

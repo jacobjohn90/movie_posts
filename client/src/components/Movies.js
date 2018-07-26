@@ -25,7 +25,7 @@ class Movies extends Component {
     render() {
         const movieList = this.state.movies.map((movie)=> {
             return (
-                <a href={`/${movie.id}`} key={movie.id}>{movie.title}</a>
+                <Link to={`/${movie.id}`} key={movie.id}>{movie.title}</Link>
             )
         })
         return (
