@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
+import EditUsername from './EditUsername';
+import EditEmail from './EditEmail';
 
 class UserPage extends Component {
 
@@ -54,11 +56,12 @@ class UserPage extends Component {
         }
     }
     handleUpdateShow = (input) => {
-        const showEdit = {...this.state.showEdit}
+        const showEdit = { ...this.state.showEdit }
+        showEdit[input] = !showEdit[input]
+        this.setState({ showEdit })
     }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
+    updateUser = (user) => {
+        this.setState({ user })
     }
 
     render() {
@@ -74,22 +77,25 @@ class UserPage extends Component {
         return (
             <div>
                 <h1>{user.username}'s Info</h1>
-                <h4>Username: {user.username}</h4>
                 {this.state.showEdit.username
                     ?
-                    <form onSubmit={this.handleSubmit}>
-                        <div>
-                            <label htmlFor="password_confirmation">Confirm Password: </label>
-                            <input onChange={this.handleChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
-                        </div>
-                        <button type="submit">Sign Up</button>
-                    </form>
-                :
-                    <button onClick={() => this.handleUpdateShow('username')}>Edit Username</button>
+                    <EditUsername handleUpdateShow={this.handleUpdateShow} updateUser={this.updateUser} {...this.props} />
+                    :
+                    <div>
+                        <h4>Username: {user.username}</h4>
+                        <button onClick={() => this.handleUpdateShow('username')}>Edit Username</button>
+                    </div>
+                    
                 }
-
-                <h4>Email: {user.email}</h4>
-                <button>Edit Email</button>
+                {this.state.showEdit.email
+                    ?
+                    <EditEmail handleUpdateShow={this.handleUpdateShow} updateUser={this.updateUser} {...this.props} />
+                    :
+                    <div>
+                        <h4>Email: {user.email}</h4>
+                        <button onClick={() => this.handleUpdateShow('email')}>Edit Email</button>
+                    </div>
+                }
                 <div>
                     <button>Edit Password</button>
                 </div>
