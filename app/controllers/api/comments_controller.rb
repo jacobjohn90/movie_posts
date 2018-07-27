@@ -1,6 +1,6 @@
 class Api::CommentsController < ApplicationController
     before_action :authenticate_user!, except: [:show, :index]
-    load_and_authorize_resource only: [:destroy]
+    load_and_authorize_resource only: [:destroy, :create, :update]
 
     def index
         if params[:movie_id]
@@ -20,12 +20,14 @@ class Api::CommentsController < ApplicationController
     end
 
     def create
+        @user = current_user
         @movie = Movie.find(params[:movie_id])
-        @comment = @movie.comments.create!(comment_params)
+        @comment = @movie.comments.create!(comment_params,)
         render json: @comment
     end
 
     def update
+        @user = current_user
         @comment = Comment.find(params[:id])
         @comment.update!(comment_params)
         render json: @comment
@@ -40,6 +42,6 @@ class Api::CommentsController < ApplicationController
 
     private
     def comment_params
-        params.require(:comment).permit(:content)
+        params.require(:comment).permit(:content, :user_id)
     end
 end

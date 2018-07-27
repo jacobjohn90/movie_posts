@@ -7,13 +7,19 @@ import UserPage from './components/UserPage';
 import Nav from './components/Nav';
 
 class App extends Component {
+  state = {
+    signedIn: ''
+  }
 
+  updateSignedIn = (signedIn) => {
+    this.setState({signedIn})
+  }
   render() {
 
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav updateSignedIn={this.updateSignedIn}/>
           <Switch>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/user/:user_id" component={UserPage} />

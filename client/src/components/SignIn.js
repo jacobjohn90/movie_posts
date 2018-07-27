@@ -18,7 +18,7 @@ class SignIn extends Component {
     signIn = async(event) => {
         event.preventDefault()
         try{
-            const res = await axios.post('auth/sign_in', this.state)
+            const res = await axios.post('/auth/sign_in', this.state)
             saveAuthTokens(res.headers)
             this.props.updateSignedIn()
             this.props.fetchCurrentUserId()

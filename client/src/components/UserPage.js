@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import axios from 'axios';
+import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 
 class UserPage extends Component {
 
     state = {
-        user: {}
+        user: {},
+        signedIn: 'false'
     }
 
     async componentDidMount() {
         const user = await this.fetchUser()
-        this.setState({user})
+        const signedIn = userIsLoggedIn()
+        this.setState({user, signedIn})
     }
 
     fetchUser = async () => {
