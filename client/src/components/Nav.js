@@ -21,10 +21,12 @@ class Nav extends Component {
             this.fetchCurrentUserId()
         }
         this.setState({ signedIn })
+        this.props.updateSignedIn(signedIn)
     }
 
     updateSignedIn = () => {
         this.setState({ signedIn: true })
+        this.props.updateSignedIn(true)
     }
 
     signOut = async (event) => {

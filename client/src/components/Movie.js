@@ -16,12 +16,11 @@ class Movie extends Component {
 
     async componentDidMount() {
         let movie = {}
-        let comments = []
         movie = await this.fetchMovie()
-        comments = await this.fetchComments()
+        await this.fetchComments()
         const currentUserEmail = await fetchCurrentUserEmail()
         const signedIn = await userIsLoggedIn()
-        this.setState({ movie, comments, currentUserEmail, signedIn })
+        this.setState({ movie, currentUserEmail, signedIn })
         this.fetchCurrentUserId()
     }
 
@@ -35,7 +34,7 @@ class Movie extends Component {
         const movieId = this.props.match.params.movie_id
         setAxiosDefaults()
         const res = await Axios.get(`/api/movies/${movieId}/comments`)
-        return res.data
+        this.setState({comments: res.data})
     }
     fetchCurrentUserId = async () => {
         const users = await fetchUsers()
@@ -48,8 +47,7 @@ class Movie extends Component {
         try {
             setAxiosDefaults()
             await Axios.delete(`/api/movies/${movieId}/comments/${commentId}`)
-            const comments = await this.fetchComments()
-            this.setState({ comments })
+            await this.fetchComments()
         } catch (error) {
             console.error(error)
         }
@@ -85,7 +83,7 @@ class Movie extends Component {
                     {commentList}
                     {this.state.signedIn
                         ?
-                        <NewComment />
+                        <NewComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props}/>
                         :
                         null
                     }
