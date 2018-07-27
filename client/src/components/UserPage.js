@@ -54,9 +54,9 @@ class UserPage extends Component {
         }
     }
     handleUpdateShow = (input) => {
-        showEdit = {...this.state.showEdit}
+        const showEdit = {...this.state.showEdit}
     }
-    
+
     handleSubmit = (event) => {
         event.preventDefault()
     }
@@ -85,7 +85,7 @@ class UserPage extends Component {
                         <button type="submit">Sign Up</button>
                     </form>
                 :
-                    <button onClick={() => this.handleUpdateShow(username)}>Edit Username</button>
+                    <button onClick={() => this.handleUpdateShow('username')}>Edit Username</button>
                 }
 
                 <h4>Email: {user.email}</h4>
