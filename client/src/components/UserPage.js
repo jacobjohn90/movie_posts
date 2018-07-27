@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 
 class UserPage extends Component {
@@ -9,7 +9,12 @@ class UserPage extends Component {
         user: {},
         comments: [],
         movies: [],
-        signedIn: 'false'
+        signedIn: false,
+        showEdit: {
+            username: false,
+            email: false,
+            password: false
+        }
     }
 
     async componentDidMount() {
@@ -48,6 +53,13 @@ class UserPage extends Component {
             console.error(error);
         }
     }
+    handleUpdateShow = (input) => {
+        showEdit = {...this.state.showEdit}
+        showEdit.
+    }
+    handleSubmit = (event) => {
+        event.preventDefault()
+    }
 
     render() {
         const user = this.state.user
@@ -63,7 +75,19 @@ class UserPage extends Component {
             <div>
                 <h1>{user.username}'s Info</h1>
                 <h4>Username: {user.username}</h4>
-                <button>Edit Username</button>
+                {this.state.showEdit.username
+                    ?
+                    <form onSubmit={this.handleSubmit}>
+                        <div>
+                            <label htmlFor="password_confirmation">Confirm Password: </label>
+                            <input onChange={this.handleChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
+                        </div>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                :
+                    <button onClick={() => this.handleUpdateShow(username)}>Edit Username</button>
+                }
+
                 <h4>Email: {user.email}</h4>
                 <button>Edit Email</button>
                 <div>
