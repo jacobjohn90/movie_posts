@@ -55,8 +55,8 @@ class UserPage extends Component {
     }
     handleUpdateShow = (input) => {
         showEdit = {...this.state.showEdit}
-        showEdit.
     }
+    
     handleSubmit = (event) => {
         event.preventDefault()
     }
