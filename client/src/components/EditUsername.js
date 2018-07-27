@@ -45,7 +45,10 @@ class EditUsername extends Component {
         this.setState({currentUser: res.data.data})
         this.props.updateUser(res.data.data)
         this.props.handleUpdateShow('username')
-
+    }
+    handleCancel = (event) => {
+        event.preventDefault()
+        this.props.handleUpdateShow('username')
     }
     
     render() {
@@ -58,6 +61,7 @@ class EditUsername extends Component {
                     </div>
                     <button type="submit">Save</button>
                 </form>
+                <button onClick={this.handleCancel}>Cancel</button>
             </div>
         );
     }
