@@ -25,6 +25,7 @@ class NewComment extends Component {
             setAxiosDefaults()
             await axios.post(`/api/movies/${movieId}/comments`, payload)
             this.props.fetchComments()
+            this.setState({content: ''})
         } catch (error) {
             console.error(error);
         }
@@ -37,7 +38,7 @@ class NewComment extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <input onChange={this.handleChange} type="text" name="content" value={this.state.content} />
+                        <textarea onChange={this.handleChange} name="content" value={this.state.content} />
                     </div>
                     <button type="submit">Add New Comment</button>
                 </form>
