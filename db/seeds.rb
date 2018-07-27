@@ -6,17 +6,20 @@ users = User.create!([
     {
         email: 'test@tester.com',
         password: 'testtest',
-        password_confirmation: 'testtest'
+        password_confirmation: 'testtest',
+        username: 'tester'
     },
     {
         email: 'jacob@john.com',
         password: 'testtest',
-        password_confirmation: 'testtest'
+        password_confirmation: 'testtest',
+        username: 'jacobjohn'
     },
     {
         email: 'example@example.com',
         password: 'testtest',
-        password_confirmation: 'testtest'
+        password_confirmation: 'testtest',
+        username: 'exampleuser'
     }
 
 ])
