@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import { setAxiosDefaults, updateUID } from '../util/SessionHeaderUtil';
 import axios from 'axios';
 
 class EditEmail extends Component {
@@ -16,10 +16,6 @@ class EditEmail extends Component {
         this.setState({ currentUser })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.handleUpdateShow('username')
-    }
     fetchUser = async () => {
         const userId = this.props.match.params.user_id
         try {
@@ -46,6 +42,8 @@ class EditEmail extends Component {
         }
         setAxiosDefaults()
         const res = await axios.patch('/auth', payload)
+        updateUID(res.data.data.email)
+        console.log(res.data.data)
         this.setState({ currentUser: res.data.data })
         this.props.updateUser(res.data.data)
         this.props.handleUpdateShow('email')

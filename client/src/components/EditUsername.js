@@ -16,10 +16,6 @@ class EditUsername extends Component {
         this.setState({currentUser})
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.handleUpdateShow('username')
-    }
     fetchUser = async () => {
         const userId = this.props.match.params.user_id
         try {

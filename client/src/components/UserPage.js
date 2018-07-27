@@ -14,7 +14,7 @@ class UserPage extends Component {
         signedIn: false,
         showEdit: {
             username: false,
-            email: false,
+            email: true,
             password: false
         }
     }

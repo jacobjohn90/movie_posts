@@ -37,3 +37,7 @@ export function clearAuthTokens() {
     localStorage.removeItem('uid')
     localStorage.removeItem('expiry')
 }
+
+export function updateUID(newEmail) {
+    localStorage.setItem('uid', newEmail)
+}
