@@ -3,6 +3,7 @@ import Axios from 'axios'
 import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
 import NewComment from './NewComment';
+import EditComment from './EditComment';
 
 class Movie extends Component {
 
@@ -11,7 +12,8 @@ class Movie extends Component {
         comments: [],
         currentUserEmail: '',
         currentUserId: '',
-        signedIn: ''
+        signedIn: '',
+        showEdit: {}
     }
 
     async componentDidMount() {
@@ -34,7 +36,7 @@ class Movie extends Component {
         const movieId = this.props.match.params.movie_id
         setAxiosDefaults()
         const res = await Axios.get(`/api/movies/${movieId}/comments`)
-        this.setState({comments: res.data})
+        this.setState({ comments: res.data })
     }
     fetchCurrentUserId = async () => {
         const users = await fetchUsers()
@@ -52,20 +54,39 @@ class Movie extends Component {
             console.error(error)
         }
     }
+    handleUpdateShow = (input) => {
+        const showEdit = { ...this.state.showEdit }
+        showEdit["show" + input] = true
+        this.setState({ showEdit })
+    }
+    hideEditForm = (input) => {
+        const showEdit = { ...this.state.showEdit }
+        showEdit["show" + input] = false
+        this.setState({ showEdit })
+    }
 
     render() {
         const movie = this.state.movie
         const commentList = this.state.comments.map((comment) => {
             return (
                 <div key={comment.id}>
-                    <p>{comment.content}</p>
                     {this.state.currentUserId == comment.user_id
                         ?
                         <div>
+                            {this.state.showEdit["show" + comment.id]
+                                ?
+                                <EditComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} currentComment={comment} hideEditForm={this.hideEditForm} />
+                                :
+                                <div>
+                                    <p>{comment.content}</p>
+                                    <button onClick={() => this.handleUpdateShow(comment.id)}>Edit</button>
+                                </div>
+                            }
+                            {/* <EditComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} currentComment={comment}/> */}
                             <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
                         </div>
                         :
-                        null
+                        <p>{comment.content}</p>
                     }
                 </div>
             )
@@ -83,7 +104,7 @@ class Movie extends Component {
                     {commentList}
                     {this.state.signedIn
                         ?
-                        <NewComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props}/>
+                        <NewComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} />
                         :
                         null
                     }
