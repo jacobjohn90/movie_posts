@@ -11,28 +11,17 @@ class Movies extends Component {
         movies: []
     }
     async componentDidMount() {
-        let movies = []
-        movies = await this.fetchMovies()
-        this.setState({ movies })
+        this.fetchMovies()
+
     }
 
     fetchMovies = async () => {
         try {
             const res = await axios.get('/api/movies')
-            return res.data
+            this.setState({movies: res.data})
         } catch (error) {
-            console.error(error)
+            console.error("fetching movies", error)
         }
-    }
-
-    searchOmdb = async () => {
-        try {
-
-        } catch (error) {
-            console.error(error);
-
-        }
-
     }
 
     render() {
@@ -46,7 +35,7 @@ class Movies extends Component {
                 <h1>{movieList}</h1>
                 <div>
                     <h3>Movie Search</h3>
-                    <MovieSearch />
+                    <MovieSearch fetchMovies={this.fetchMovies}/>
                 </div>
             </div>
         );
