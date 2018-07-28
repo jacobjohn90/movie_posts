@@ -19,7 +19,7 @@ class MovieSearch extends Component {
         let search = this.state.searchField
         search = search.replace(' ', '+')
         try {
-            const res = await axios.get(`/api/externals?s=${search}`)
+            const res = await axios.get(`/api/externals/10?s=${search}`)
             this.setState({ searchResults: res.data.Search })
 
         } catch (error) {
@@ -31,7 +31,7 @@ class MovieSearch extends Component {
         const movie = this.state.searchResults[index]
 
         try {
-            const res = await axios.post(`/api/externals?t=${movie.Title}`)
+            const res = await axios.get(`/api/externals/1?t=${movie.Title}`)
             this.setState({ addMovie: res.data })
             this.sendToDb()
         } catch (error) {
