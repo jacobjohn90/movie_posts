@@ -19,9 +19,9 @@ class MovieSearch extends Component {
         let search = this.state.searchField
         search = search.replace(' ', '+')
         try {
-            const res = await axios.get(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}&t=${search}&plot=full`)
-            console.log(res)
-            // this.setState({ searchResult: res.data })
+            const res = await axios.get(`/api/externals?t=${search}`)
+            console.log(res.data)
+
         } catch (error) {
             console.error(error);
         }
