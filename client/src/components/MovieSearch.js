@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { userIsLoggedIn } from '../util/SessionHeaderUtil';
 
 class MovieSearch extends Component {
     state = {
-        signedIn: '',
         searchField: '',
-        searchResult: {},
+        searchResults: [],
         addMovie: {}
     }
 
@@ -16,63 +14,74 @@ class MovieSearch extends Component {
         this.setState(newState)
     }
 
-    handleSubmit = async (event) => {
+    handleInitalSearch = async (event) => {
         event.preventDefault()
         let search = this.state.searchField
         search = search.replace(' ', '+')
         try {
-            const res = await axios.get(`/api/externals?t=${search}`)
-            this.setState({ searchResult: res.data })
+            const res = await axios.get(`/api/externals?s=${search}`)
+            this.setState({ searchResults: res.data.Search })
 
         } catch (error) {
             console.error(error);
         }
     }
 
-    addToDb = async () => {
-        const movie = this.state.searchResult
-        const signedIn = userIsLoggedIn()
-        const payload = {
-            'title': movie.Title,
-            'mpaa_rating': movie.Rating,
-            'img': movie.Poster,
-            'summary': movie.Plot
-        }
-        if (signedIn) {
-            try {
-                const res = await axios.post('/api/movies', payload)
-                this.setState({ addMovie: res.data, searchResult: '' })
-                this.props.fetchMovies()
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            console.log("Must be logged in");
-            
-        }
+    handleFinalSearch = async (index) => {
+        const movie = this.state.searchResults[index]
 
+        try {
+            const res = await axios.post(`/api/externals?t=${movie.Title}`)
+            this.setState({ addMovie: res.data })
+            this.sendToDb()
+        } catch (error) {
+            console.error(error);
+        }
     }
+    sendToDb = async () => {
+        const newMovie = this.state.addMovie
+        const payload = {
+            'title':newMovie.Title,
+            'mpaa_rating': newMovie.Rating,
+            'img': newMovie.Poster,
+            'summary': newMovie.Plot
+        }
+        try {
+            const res = await axios.post('/api/movies', payload)
+            const searchResults = []
+            const searchField = ''
+            this.setState({ addMovie: res.data, searchResults, searchField})
+            this.props.fetchMovies()
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     render() {
-        const movie = this.state.searchResult
+        const movieList = this.state.searchResults.map((movie, i) => {
+            return (
+                <button key={i} onClick={() => this.handleFinalSearch(i)}>
+                    <img src={movie.Poster} alt={movie.Title} />
+                    <p>{movie.Title}</p>
+                </button>
+            )
+        })
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleInitalSearch}>
                     <div>
                         <textarea onChange={this.handleChange} name="searchField" value={this.state.searchField} />
                     </div>
                     <button type="submit">Search Movie</button>
                 </form>
                 <div>
-                    {movie['Title']
+                    {movieList}
+                    {/* {this.state.searchResults.length > 0
                         ?
-                        <div>
-                            <button onClick={this.addToDb}>
-                                <img src={movie.Poster} alt={movie.Title} />
-                            </button>
-                        </div>
+                        {movieList}
                         :
                         null
-                    }
+                    } */}
                 </div>
             </div>
         );
