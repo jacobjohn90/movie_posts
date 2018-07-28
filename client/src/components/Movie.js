@@ -82,7 +82,6 @@ class Movie extends Component {
                                     <button onClick={() => this.handleUpdateShow(comment.id)}>Edit</button>
                                 </div>
                             }
-                            {/* <EditComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} currentComment={comment}/> */}
                             <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
                         </div>
                         :
