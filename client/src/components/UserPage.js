@@ -96,6 +96,7 @@ class UserPage extends Component {
                         <button onClick={() => this.handleUpdateShow('email')}>Edit Email</button>
                     </div>
                 }
+                
                 <div>
                     <button>Edit Password</button>
                 </div>
