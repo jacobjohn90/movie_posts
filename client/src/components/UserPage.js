@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import EditUsername from './EditUsername';
 import EditEmail from './EditEmail';
+import EditPassword from './EditPassword';
 
 class UserPage extends Component {
 
@@ -96,10 +97,15 @@ class UserPage extends Component {
                         <button onClick={() => this.handleUpdateShow('email')}>Edit Email</button>
                     </div>
                 }
-                
-                <div>
-                    <button>Edit Password</button>
-                </div>
+                {this.state.showEdit.password
+                    ?
+                    <EditPassword handleUpdateShow={this.handleUpdateShow} updateUser={this.updateUser} {...this.props} />
+                    :
+                    <div>
+                        <button onClick={() => this.handleUpdateShow('password')}>Edit Password</button>
+                    </div>
+                }
+
                 <h1>My Comments</h1>
                 <ul>
                     {commentList}
