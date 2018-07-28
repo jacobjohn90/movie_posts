@@ -70,7 +70,7 @@ class Movie extends Component {
         const commentList = this.state.comments.map((comment) => {
             return (
                 <div key={comment.id}>
-                    {this.state.currentUserId == comment.user_id
+                    {this.state.currentUserId === comment.user_id
                         ?
                         <div>
                             {this.state.showEdit["show" + comment.id]

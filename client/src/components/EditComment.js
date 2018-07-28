@@ -25,7 +25,6 @@ class EditComment extends Component {
             user_id: this.props.userId,
             content: this.state.content
         }
-        console.log(payload)
         try {
             setAxiosDefaults()
             await axios.patch(`/api/movies/${movieId}/comments/${commentId}`, payload)
