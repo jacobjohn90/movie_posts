@@ -34,8 +34,9 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div className="animated fadeInLeft">
-                <SignInWrapper>
+            <SignInWrapper>
+
+                <div className='animated fadeInRight'>
                     <h3>Sign In</h3>
                     <form onSubmit={this.signIn}>
                         <div>
@@ -50,9 +51,9 @@ class SignIn extends Component {
                         <Button type="submit">Sign In</Button>
                         <Button onClick={this.props.updateShowSignIn}>Cancel</Button>
                     </form>
-                    
-                </SignInWrapper>
-            </div>
+                </div>
+
+            </SignInWrapper>
         );
     }
 }

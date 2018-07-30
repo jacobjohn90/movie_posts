@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { saveAuthTokens } from '../util/SessionHeaderUtil';
 import { SignUpWrapper } from '../styled/SignUpWrapper';
+import { Button } from '../styled/NavWrapper';
 
 class SignUp extends Component {
 
@@ -31,7 +32,7 @@ class SignUp extends Component {
     render() {
         return (
             <SignUpWrapper>
-                <div className='animated fadeInRight'>
+                <div className='animated fadeInLeft'>
 
 
                     <h3>Sign Up</h3>
@@ -48,8 +49,8 @@ class SignUp extends Component {
                             <label htmlFor="password_confirmation">Confirm Password: </label>
                             <input onChange={this.onChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
                         </div>
-                        <button type="submit">Sign Up</button>
-                        <button onClick={this.props.updateShowSignUp}>Cancel</button>
+                        <Button type="submit">Sign Up</Button>
+                        <Button onClick={this.props.updateShowSignUp}>Cancel</Button>
                     </form>
                 </div>
             </SignUpWrapper>

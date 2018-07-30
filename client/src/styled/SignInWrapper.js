@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 
 const SignInWrapper = styled.div`
-position: relative;
-top: 85px;
-right: 5%;
+position: absolute;
+top: 2rem;
+right: 35%;
 min-width: 30vw;
-
 
 form {
     display: flex;
@@ -20,7 +19,8 @@ form {
     button {
         flex:0;
     }
-};
+}
+
 background-color: #d2d2d2;
 padding: 20px;
 
