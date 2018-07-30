@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import { Button, FontAwesomeStyling, NavWrapper} from '../styled/NavWrapper';
 
 class Nav extends Component {
     state = {
@@ -61,23 +62,25 @@ class Nav extends Component {
         const userId = this.state.currentUserId
         return (
 
-            <div>
-                <h1>Comment Reels</h1>
+            <NavWrapper>
+                <Link to='/'>Comment Reels</Link>
                 {this.state.signedIn
                     ?
                     <div>
                         <Link to={`/user/${userId}`}>
-                            <button onClick={this.prevent}>
-                                <div>
-                                    User Page <FontAwesomeIcon icon="users-cog" />
-                                </div>
-                            </button>
+                            <Button onClick={this.prevent}>
+                                <FontAwesomeStyling>
+                                    <p>User Page</p>
+                                   <FontAwesomeIcon icon="users-cog" />
+                                </FontAwesomeStyling>
+                            </Button>
                         </Link>
-                        <button onClick={this.signOut}>
-                            <div>
-                                Sign Out <FontAwesomeIcon icon="sign-out-alt" />
-                            </div>
-                        </button>
+                        <Button onClick={this.signOut}>
+                            <FontAwesomeStyling>
+                                <p>Sign Out</p>
+                                <FontAwesomeIcon icon="sign-out-alt" />
+                            </FontAwesomeStyling>
+                        </Button>
                     </div>
                     :
                     <div>
@@ -85,7 +88,7 @@ class Nav extends Component {
                         <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId} />
                     </div>
                 }
-            </div>
+            </NavWrapper>
         );
     }
 }
