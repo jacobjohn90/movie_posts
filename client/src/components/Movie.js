@@ -91,11 +91,38 @@ class Movie extends Component {
             )
         })
 
+        // actor:
+        // "Rowan Atkinson, Matthew Broderick, Niketa Calame-Harris, Jim Cummings"
+        // created_at:
+        // "2018-07-30T14:15:28.220Z"
+        // director:
+        // "Roger Allers, Rob Minkoff"
+        // id:
+        // 28
+        // img:
+        // "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg"
+        // mpaa_rating:
+        // "G"
+        // rating:
+        // "8.5"
+        // summary:
+        // "A young lion Prince is cast out of his pride by his cruel uncle, who claims he killed his father. While the uncle rules with an iron paw, the prince grows up beyond the Savannah, living by a philosoph…"
+        // title:
+        // "The Lion King"
+        // updated_at:
+        // "2018-07-30T14:15:28.220Z"
+        // year:
+        // 1994
+
         return (
             <div>
                 <div>
                     <h1>{movie.title}</h1>
                     <img src={movie.img} alt="Movie Poster" />
+                    <p><strong>Director(s): {movie.director}</strong></p>
+                    <p><strong>Actor(s): {movie.actor}</strong></p>
+                    <p><strong>Year: {movie.year}</strong></p>
+
                     <p> <strong>Description:</strong> {movie.summary}</p>
                 </div>
                 <div>

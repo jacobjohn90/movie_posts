@@ -44,8 +44,13 @@ class MovieSearch extends Component {
             'title':newMovie.Title,
             'mpaa_rating': newMovie.Rating,
             'img': newMovie.Poster,
-            'summary': newMovie.Plot
+            'summary': newMovie.Plot,
+            'actor': newMovie.Actors,
+            'director': newMovie.Dirctor,
+            'year': newMovie.Year,
+            'rating': newMovie.imdbRating
         }
+
         try {
             const res = await axios.post('/api/movies', payload)
             const searchResults = []
@@ -76,12 +81,6 @@ class MovieSearch extends Component {
                 </form>
                 <div>
                     {movieList}
-                    {/* {this.state.searchResults.length > 0
-                        ?
-                        {movieList}
-                        :
-                        null
-                    } */}
                 </div>
             </div>
         );

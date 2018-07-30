@@ -6,7 +6,7 @@ import MovieSearch from './MovieSearch';
 class Movies extends Component {
 
     state = {
-        
+
         searchedMovies: [],
         movies: []
     }
@@ -18,7 +18,7 @@ class Movies extends Component {
     fetchMovies = async () => {
         try {
             const res = await axios.get('/api/movies')
-            this.setState({movies: res.data})
+            this.setState({ movies: res.data })
         } catch (error) {
             console.error("fetching movies", error)
         }
@@ -27,7 +27,9 @@ class Movies extends Component {
     render() {
         const movieList = this.state.movies.map((movie) => {
             return (
-                <Link to={`/${movie.id}`} key={movie.id}>{movie.title}</Link>
+                <Link to={`/${movie.id}`} key={movie.id}>
+                    <img src={movie.img} alt={movie.title} />
+                </Link>
             )
         })
         return (
@@ -35,7 +37,7 @@ class Movies extends Component {
                 <h1>{movieList}</h1>
                 <div>
                     <h3>Movie Search</h3>
-                    <MovieSearch fetchMovies={this.fetchMovies}/>
+                    <MovieSearch fetchMovies={this.fetchMovies} />
                 </div>
             </div>
         );

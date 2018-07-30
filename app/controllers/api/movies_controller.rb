@@ -30,6 +30,6 @@ class Api::MoviesController < ApplicationController
     private
 
     def movie_params
-        params.require(:movie).permit(:title, :mpaa_rating, :img, :summary)
+        params.require(:movie).permit(:title, :mpaa_rating, :img, :summary, :actor, :rating, :director, :year)
     end
 end
