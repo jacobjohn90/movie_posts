@@ -5,6 +5,10 @@ import MainPage from './components/MainPage';
 import Movie from './components/Movie';
 import UserPage from './components/UserPage';
 import Nav from './components/Nav';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUsersCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUsersCog, faSignOutAlt)
 
 class App extends Component {
   state = {

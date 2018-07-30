@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { fetchUsers, fetchCurrentUserEmail } from '../util/FetchCurrentUser';
 import { clearAuthTokens, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
@@ -52,6 +53,9 @@ class Nav extends Component {
         const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
         this.setState({ currentUserId: currentUser.id })
     }
+    prevent = (e) => {
+        e.preventDefault()
+    }
 
     render() {
         const userId = this.state.currentUserId
@@ -63,9 +67,17 @@ class Nav extends Component {
                     ?
                     <div>
                         <Link to={`/user/${userId}`}>
-                            <button>User Profile</button>
+                            <button onClick={this.prevent}>
+                                <div>
+                                    User Page <FontAwesomeIcon icon="users-cog" />
+                                </div>
+                            </button>
                         </Link>
-                        <button onClick={this.signOut}>Sign Out</button>
+                        <button onClick={this.signOut}>
+                            <div>
+                                Sign Out <FontAwesomeIcon icon="sign-out-alt" />
+                            </div>
+                        </button>
                     </div>
                     :
                     <div>
