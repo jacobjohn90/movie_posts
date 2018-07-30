@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import { Button, FontAwesomeStyling, NavWrapper } from '../styled/NavWrapper';
+import Button from '../styled/ButtonStyle'
+import { FontAwesomeStyling, NavWrapper } from '../styled/NavWrapper';
 
 class Nav extends Component {
     state = {
@@ -110,7 +111,8 @@ class Nav extends Component {
                                 <FontAwesomeStyling>
                                     <p>Sign In</p>
                                     <FontAwesomeIcon icon="sign-in-alt" />
-                                </FontAwesomeStyling></Button>
+                                </FontAwesomeStyling>
+                            </Button>
                         }
                     </div>
                 }

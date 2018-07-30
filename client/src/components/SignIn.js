@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { saveAuthTokens } from '../util/SessionHeaderUtil';
 import { SignInWrapper } from '../styled/SignInWrapper';
-import { Button } from '../styled/NavWrapper';
+import Button from '../styled/ButtonStyle';
 
 class SignIn extends Component {
 
