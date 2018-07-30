@@ -42,11 +42,11 @@ class MovieSearch extends Component {
         const newMovie = this.state.addMovie
         const payload = {
             'title':newMovie.Title,
-            'mpaa_rating': newMovie.Rating,
+            'mpaa_rating': newMovie.Rated,
             'img': newMovie.Poster,
             'summary': newMovie.Plot,
             'actor': newMovie.Actors,
-            'director': newMovie.Dirctor,
+            'director': newMovie.Director,
             'year': newMovie.Year,
             'rating': newMovie.imdbRating
         }
