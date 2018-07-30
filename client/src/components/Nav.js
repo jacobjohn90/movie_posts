@@ -8,13 +8,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import { Button, FontAwesomeStyling, NavWrapper} from '../styled/NavWrapper';
+import { Button, FontAwesomeStyling, NavWrapper } from '../styled/NavWrapper';
 
 class Nav extends Component {
     state = {
         signedIn: false,
         currentUserEmail: '',
         currentUserId: '',
+        showSignIn: false,
+        showSignUp: false,
     }
 
     async componentDidMount() {
@@ -54,6 +56,14 @@ class Nav extends Component {
         const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
         this.setState({ currentUserId: currentUser.id })
     }
+    updateShowSignIn = () => {
+        const showSignIn = !this.state.showSignIn
+        this.setState({ showSignIn })
+    }
+    updateShowSignUp = () => {
+        const showSignUp = !this.state.showSignUp
+        this.setState({ showSignUp })
+    }
 
     render() {
         const userId = this.state.currentUserId
@@ -68,7 +78,7 @@ class Nav extends Component {
                             <Button>
                                 <FontAwesomeStyling>
                                     <p>User Page</p>
-                                   <FontAwesomeIcon icon="users-cog" />
+                                    <FontAwesomeIcon icon="users-cog" />
                                 </FontAwesomeStyling>
                             </Button>
                         </Link>
@@ -81,8 +91,27 @@ class Nav extends Component {
                     </div>
                     :
                     <div>
-                        <SignUp updateSignedIn={this.updateSignedIn} />
-                        <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId} />
+                        {this.state.showSignUp
+                            ?
+                            <SignUp updateSignedIn={this.updateSignedIn} updateShowSignUp={this.updateShowSignUp} />
+                            :
+                            <Button onClick={this.updateShowSignUp}>
+                                <FontAwesomeStyling>
+                                    <p>Sign Up</p>
+                                    <FontAwesomeIcon icon="user-plus" />
+                                </FontAwesomeStyling>
+                            </Button>
+                        }
+                        {this.state.showSignIn
+                            ?
+                            <SignIn updateSignedIn={this.updateSignedIn} fetchCurrentUserEmail={this.fetchCurrentUserEmail} fetchCurrentUserId={this.fetchCurrentUserId} updateShowSignIn={this.updateShowSignIn} />
+                            :
+                            <Button onClick={this.updateShowSignIn}>
+                                <FontAwesomeStyling>
+                                    <p>Sign In</p>
+                                    <FontAwesomeIcon icon="sign-in-alt" />
+                                </FontAwesomeStyling></Button>
+                        }
                     </div>
                 }
             </NavWrapper>

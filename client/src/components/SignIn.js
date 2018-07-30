@@ -1,49 +1,57 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { saveAuthTokens } from '../util/SessionHeaderUtil';
+import { SignInWrapper } from '../styled/SignInWrapper';
+import { Button } from '../styled/NavWrapper';
 
 class SignIn extends Component {
-    
+
     state = {
         email: '',
         password: ''
     }
 
     onChange = (event) => {
-        const newState = {...this.state}
+        const newState = { ...this.state }
         newState[event.target.name] = event.target.value
         this.setState(newState)
     }
-    
-    signIn = async(event) => {
+
+    signIn = async (event) => {
         event.preventDefault()
-        try{
+        try {
             const res = await axios.post('/auth/sign_in', this.state)
             saveAuthTokens(res.headers)
             this.props.updateSignedIn()
             this.props.fetchCurrentUserId()
-        } catch (error){
+            this.props.updateShowSignIn()
+        } catch (error) {
             console.error(error)
         }
     }
-    
-    
-    
+
+
+
     render() {
         return (
-            <div>
-                <form onSubmit={this.signIn}>
-                    <div>
-                        <label htmlFor="email">E-mail: </label>
-                        <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
-                    </div>
+            <div className="animated fadeInLeft">
+                <SignInWrapper>
+                    <h3>Sign In</h3>
+                    <form onSubmit={this.signIn}>
+                        <div>
+                            <label htmlFor="email">E-mail: </label>
+                            <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password: </label>
+                            <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
+                        </div>
 
-                    <button type="submit">Sign In</button>
-                </form>
+                        <Button type="submit">Sign In</Button>
+                        <Button onClick={this.props.updateShowSignIn}>Cancel</Button>
+                    </form>
+                    
+                </SignInWrapper>
             </div>
         );
     }

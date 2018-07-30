@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { saveAuthTokens } from '../util/SessionHeaderUtil';
+import { SignUpWrapper } from '../styled/SignUpWrapper';
 
 class SignUp extends Component {
 
@@ -29,23 +30,30 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.signUp}>
-                    <div>
-                        <label htmlFor="email">E-mail: </label>
-                        <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
-                    </div>
-                    <div>
-                        <label htmlFor="password_confirmation">Confirm Password: </label>
-                        <input onChange={this.onChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </form>
-            </div>
+            <SignUpWrapper>
+                <div className='animated fadeInRight'>
+
+
+                    <h3>Sign Up</h3>
+                    <form onSubmit={this.signUp}>
+                        <div>
+                            <label htmlFor="email">E-mail: </label>
+                            <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password: </label>
+                            <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
+                        </div>
+                        <div>
+                            <label htmlFor="password_confirmation">Confirm Password: </label>
+                            <input onChange={this.onChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
+                        </div>
+                        <button type="submit">Sign Up</button>
+                        <button onClick={this.props.updateShowSignUp}>Cancel</button>
+                    </form>
+                </div>
+            </SignUpWrapper>
+
         );
     }
 }
