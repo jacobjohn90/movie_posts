@@ -54,9 +54,6 @@ class Nav extends Component {
         const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
         this.setState({ currentUserId: currentUser.id })
     }
-    prevent = (e) => {
-        e.preventDefault()
-    }
 
     render() {
         const userId = this.state.currentUserId
@@ -68,7 +65,7 @@ class Nav extends Component {
                     ?
                     <div>
                         <Link to={`/user/${userId}`}>
-                            <Button onClick={this.prevent}>
+                            <Button>
                                 <FontAwesomeStyling>
                                     <p>User Page</p>
                                    <FontAwesomeIcon icon="users-cog" />
