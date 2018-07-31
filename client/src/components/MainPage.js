@@ -7,7 +7,7 @@ class MainPage extends Component {
     render() {
         return (
             <div>
-                <Movies />
+                <Movies updatedSignedIn={this.props.updatedSignedIn}/>
             </div>
         );
     }

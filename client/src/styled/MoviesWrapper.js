@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const MoviesStyles = styled.div`
+const MovieListStyles = styled.div`
 text-align: center;
 margin-top: 1rem;
 display: flex;
@@ -44,11 +44,20 @@ a {
 
 }
 `
+const MoviesStyles = styled.div`
+    display: flex;
+`
 const MovieSearchStyle = styled.div`
-display: block;
+    text-align: center;
+    width: 40vw;
+    max-height: 80vh;
+    overflow: auto;
+    background-color: #182433;
+
 `
 
 export {
+    MovieListStyles,
     MoviesStyles,
     MovieSearchStyle
 }

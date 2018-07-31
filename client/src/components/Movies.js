@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import MovieSearch from './MovieSearch';
-import { MoviesStyles, MovieSearchStyle } from '../styled/MoviesWrapper';
+import { MovieListStyles, MoviesStyles, MovieSearchStyle } from '../styled/MoviesWrapper';
 import { userIsLoggedIn } from '../util/SessionHeaderUtil';
 
 class Movies extends Component {
@@ -39,13 +39,18 @@ class Movies extends Component {
         })
         return (
             <MoviesStyles>
-                {movieList}
-                <MovieSearchStyle>
-                    <div>
+                <MovieListStyles>
+                    {movieList}
+                </MovieListStyles>
+                {this.props.updatedSignedIn
+                    ?
+                    <MovieSearchStyle>
                         <h3>Movie Search</h3>
                         <MovieSearch fetchMovies={this.fetchMovies} />
-                    </div>
-                </MovieSearchStyle>
+                    </MovieSearchStyle>
+                    :
+                    null
+                }
             </MoviesStyles>
         );
     }

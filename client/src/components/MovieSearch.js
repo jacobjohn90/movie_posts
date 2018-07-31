@@ -76,7 +76,7 @@ class MovieSearch extends Component {
             <div>
                 <form onSubmit={this.handleInitalSearch}>
                     <div>
-                        <textarea onChange={this.handleChange} name="searchField" value={this.state.searchField} />
+                        <input onChange={this.handleChange} name="searchField" value={this.state.searchField} />
                     </div>
                     <Button type="submit">Search Movie</Button>
                 </form>
