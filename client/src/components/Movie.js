@@ -17,7 +17,8 @@ class Movie extends Component {
         currentUserEmail: '',
         currentUserId: '',
         signedIn: '',
-        showEdit: {}
+        showEdit: {},
+        users: []
     }
 
     async componentDidMount() {
@@ -45,8 +46,10 @@ class Movie extends Component {
     fetchCurrentUserId = async () => {
         const users = await fetchUsers()
         const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
-        this.setState({ currentUserId: currentUser.id })
+        this.setState({ currentUserId: currentUser.id, users })
     }
+
+
 
     deleteComment = async (commentId) => {
         const movieId = this.props.match.params.movie_id
@@ -70,8 +73,11 @@ class Movie extends Component {
     }
 
     render() {
+
+
         const movie = this.state.movie
         const commentList = this.state.comments.map((comment) => {
+            const commentOwner = this.state.users.find((user) => user.id === comment.user_id)
             return (
                 <CommentWrapper key={comment.id}>
                     {this.state.currentUserId === comment.user_id && this.props.updatedSignedIn
@@ -82,7 +88,7 @@ class Movie extends Component {
                                 <EditComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} currentComment={comment} hideEditForm={this.hideEditForm} />
                                 :
                                 <TextWrapper>
-                                    <p>{comment.content}</p>
+                                    <p>{commentOwner.username} wrote: {comment.content}</p>
                                     <Button onClick={() => this.handleUpdateShow(comment.id)}>
                                         <FontAwesomeStyling>
                                             <FontAwesomeIcon icon="edit" />
@@ -97,7 +103,8 @@ class Movie extends Component {
                             </Button>
                         </TextWrapper>
                         :
-                        <p>{comment.content}</p>
+                        <p>{commentOwner ? `${commentOwner.username}` : null} wrote: {comment.content}</p>
+
                     }
                 </CommentWrapper>
             )

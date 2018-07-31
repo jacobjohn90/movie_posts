@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import Button from '../styled/ButtonStyle';
 class NewComment extends Component {
 
     state = {
@@ -40,7 +41,7 @@ class NewComment extends Component {
                     <div>
                         <textarea onChange={this.handleChange} name="content" value={this.state.content} />
                     </div>
-                    <button type="submit">Add New Comment</button>
+                    <Button type="submit">Add New Comment</Button>
                 </form>
             </div>
         );
