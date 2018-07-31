@@ -51,11 +51,11 @@ class SignUp extends Component {
                         </div>
                         <div>
                             <label htmlFor="password">Password: </label>
-                            <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
+                            <input onChange={this.onChange} type="password" name="password" value={this.state.password} />
                         </div>
                         <div>
                             <label htmlFor="password_confirmation">Confirm Password: </label>
-                            <input onChange={this.onChange} type="text" name="password_confirmation" value={this.state.password_confirmation} />
+                            <input onChange={this.onChange} type="password" name="password_confirmation" value={this.state.password_confirmation} />
                         </div>
                         <Button type="submit">Sign Up</Button>
                         <Button onClick={this.props.updateShowSignUp}>Cancel</Button>

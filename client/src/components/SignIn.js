@@ -45,7 +45,7 @@ class SignIn extends Component {
                         </div>
                         <div>
                             <label htmlFor="password">Password: </label>
-                            <input onChange={this.onChange} type="text" name="password" value={this.state.password} />
+                            <input onChange={this.onChange} type="password" name="password" value={this.state.password} />
                         </div>
 
                         <Button type="submit">Sign In</Button>
