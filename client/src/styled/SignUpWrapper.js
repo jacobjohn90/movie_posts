@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const SignUpWrapper = styled.div`
 
 position: absolute;
+z-index: 100;
 top: 2rem;
 right: 10%;
 min-width: 30vw;
