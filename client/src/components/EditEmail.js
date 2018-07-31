@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { setAxiosDefaults, updateUID } from '../util/SessionHeaderUtil';
 import axios from 'axios';
+import Button from '../styled/ButtonStyle';
 
 class EditEmail extends Component {
     state = {
@@ -61,9 +62,9 @@ class EditEmail extends Component {
                         <label>New Email: </label>
                         <input placeholder={this.state.currentUser.email} type="text" name="email" value={this.state.email} onChange={this.handleChange} />
                     </div>
-                    <button type="submit">Save</button>
+                    <Button type="submit">Save</Button>
                 </form>
-                <button onClick={this.handleCancel}>Cancel</button>
+                <Button onClick={this.handleCancel}>Cancel</Button>
             </div>
         );
     }

@@ -7,19 +7,22 @@ users = User.create!([
         email: 'test@tester.com',
         password: 'testtest',
         password_confirmation: 'testtest',
-        username: 'tester'
+        username: 'tester',
+        image: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     },
     {
         email: 'jacob@john.com',
         password: 'testtest',
         password_confirmation: 'testtest',
-        username: 'jacobjohn'
+        username: 'jacobjohn',
+        image: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     },
     {
         email: 'example@example.com',
         password: 'testtest',
         password_confirmation: 'testtest',
-        username: 'exampleuser'
+        username: 'exampleuser',
+        image: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     }
 
 ])

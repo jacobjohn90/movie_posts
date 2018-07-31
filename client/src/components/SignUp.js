@@ -8,8 +8,10 @@ class SignUp extends Component {
 
     state = {
         email: '',
+        username: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        image: ''
     }
 
     onChange = (event) => {
@@ -19,6 +21,8 @@ class SignUp extends Component {
     }
     signUp = async (event) => {
         event.preventDefault()
+        const image = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+        this.setState({image})
         try {
             const res = await axios.post('/auth', this.state)
             saveAuthTokens(res.headers)
@@ -40,6 +44,10 @@ class SignUp extends Component {
                         <div>
                             <label htmlFor="email">E-mail: </label>
                             <input onChange={this.onChange} type="text" name="email" value={this.state.email} />
+                        </div>
+                        <div>
+                            <label htmlFor="username">Username: </label>
+                            <input onChange={this.onChange} type="text" name="username" value={this.state.email} />
                         </div>
                         <div>
                             <label htmlFor="password">Password: </label>

@@ -4,7 +4,7 @@ import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
 import NewComment from './NewComment';
 import EditComment from './EditComment';
-import { MovieTextWrapper, MovieContentWrapper, MovieWrapper, CommentWrapper, TextWrapper } from '../styled/MovieWrapper';
+import { MovieTextWrapper, MovieContentWrapper, MovieWrapper, CommentWrapper, TextWrapper, NewCommentWrapper } from '../styled/MovieWrapper';
 import Button from '../styled/ButtonStyle';
 import { FontAwesomeStyling } from '../styled/NavWrapper';
 import { FontAwesomeIcon } from '../../node_modules/@fortawesome/react-fontawesome';
@@ -74,7 +74,7 @@ class Movie extends Component {
         const commentList = this.state.comments.map((comment) => {
             return (
                 <CommentWrapper key={comment.id}>
-                    {this.state.currentUserId === comment.user_id
+                    {this.state.currentUserId === comment.user_id && this.props.updatedSignedIn
                         ?
                         <TextWrapper>
                             {this.state.showEdit["show" + comment.id]
@@ -122,11 +122,13 @@ class Movie extends Component {
                 <div>
                     <h2>Comments about this Movie</h2>
                     {commentList}
-                    {this.state.signedIn
+                    {this.props.updatedSignedIn
                         ?
-                        <NewComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} />
+                        <NewCommentWrapper>
+                            <NewComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} />
+                        </NewCommentWrapper>
                         :
-                        null
+                        <h3>Sign In to add a comment!</h3>
                     }
                 </div>
             </MovieWrapper>

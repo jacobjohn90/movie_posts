@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import Button from '../styled/ButtonStyle';
 
 class EditPassword extends Component {
     state = {
@@ -64,9 +65,9 @@ class EditPassword extends Component {
                         <label>Confirm New Password: </label>
                         <input type="text" name="password_confirmation" value={this.state.password_confirmation} onChange={this.handleChange} />
                     </div>
-                    <button type="submit">Save</button>
+                    <Button type="submit">Save</Button>
                 </form>
-                <button onClick={this.handleCancel}>Cancel</button>
+                <Button onClick={this.handleCancel}>Cancel</Button>
             </div>
         );
     }

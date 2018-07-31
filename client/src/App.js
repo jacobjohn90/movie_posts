@@ -29,6 +29,9 @@ class App extends Component {
     const MainPageComponent = (props) => (
       <MainPage updatedSignedIn={this.state.signedIn} {...props} />
     )
+    const MovieComponent = (props) => (
+      <Movie updatedSignedIn={this.state.signedIn} {...props} />
+    )
 
     return (
       <Router>
@@ -37,7 +40,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={MainPageComponent} />
             <Route exact path="/user/:user_id" component={UserPage} />
-            <Route exact path="/:movie_id" component={Movie} />
+            <Route exact path="/:movie_id" render={MovieComponent} />
           </Switch>
         </div>
       </Router>

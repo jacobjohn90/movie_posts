@@ -6,7 +6,6 @@ const Button = styled.button`
     border: ruby;
     border-radius: 5px;
     padding: 0.5rem;
-    // margin-bottom: 0.5rem;
     color: #d2d2d2;
     :hover{
         background-color: white;

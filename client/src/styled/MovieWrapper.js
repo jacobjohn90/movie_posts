@@ -6,6 +6,9 @@ h1, h2 {
     background-color: rgba(0,0,0,0.6);
     padding: 5px 0;
 }
+h3 {
+    text-align: center;
+}
 `
 const MovieContentWrapper = styled.div`
 img {
@@ -56,10 +59,15 @@ button {
 }
 `
 
+const NewCommentWrapper = styled.div`
+text-align: center;
+`
+
 export {
     MovieWrapper,
     MovieContentWrapper,
     MovieTextWrapper,
     CommentWrapper,
-    TextWrapper
+    TextWrapper,
+    NewCommentWrapper
 }

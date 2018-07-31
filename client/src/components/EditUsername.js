@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import Button from '../styled/ButtonStyle';
 
 class EditUsername extends Component {
     state = {
@@ -59,9 +60,9 @@ class EditUsername extends Component {
                         <label>New Username: </label>
                         <input placeholder={this.state.currentUser.username} type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                     </div>
-                    <button type="submit">Save</button>
+                    <Button type="submit">Save</Button>
                 </form>
-                <button onClick={this.handleCancel}>Cancel</button>
+                <Button onClick={this.handleCancel}>Cancel</Button>
             </div>
         );
     }

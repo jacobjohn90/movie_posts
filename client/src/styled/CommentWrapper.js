@@ -6,9 +6,10 @@ const FormStyle = styled.form`
     textarea {
         background-color: #182433;
         margin: 5px;
+        color: white;
     };
     textarea::placeholder {
-        color: white;
+        color: #d2d2d2;
     }
 `
 const EditCommentWrapper = styled.div`
