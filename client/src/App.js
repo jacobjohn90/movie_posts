@@ -6,9 +6,9 @@ import Movie from './components/Movie';
 import UserPage from './components/UserPage';
 import Nav from './components/Nav';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUsersCog, faSignOutAlt, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faUsersCog, faSignOutAlt, faSignInAlt, faUserPlus, faEdit, faTimesCircle, faSave } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUsersCog, faSignOutAlt, faSignInAlt, faUserPlus )
+library.add(faUsersCog, faSignOutAlt, faSignInAlt, faUserPlus, faEdit, faTimesCircle, faSave )
 
 class App extends Component {
   state = {

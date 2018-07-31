@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
+import Button from '../styled/ButtonStyle';
+import { FormStyle, EditCommentWrapper } from '../styled/CommentWrapper';
+import { FontAwesomeStyling } from '../styled/NavWrapper';
+import { FontAwesomeIcon } from '../../node_modules/@fortawesome/react-fontawesome';
 
 class EditComment extends Component {
-    
+
     state = {
         content: ''
     }
@@ -40,18 +44,20 @@ class EditComment extends Component {
         event.preventDefault()
         this.props.hideEditForm(commentId)
     }
-    
+
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <textarea onChange={this.handleChange} name="content" value={this.state.content} placeholder={this.props.currentComment.content} />
-                    </div>
-                    <button type="submit">Save Changes</button>
-                </form> 
-                <button onClick={this.handleCancel}>Cancel</button>
-            </div>
+            <EditCommentWrapper>
+                <FormStyle onSubmit={this.handleSubmit}>
+                    <textarea onChange={this.handleChange} name="content" value={this.state.content} placeholder={this.props.currentComment.content} />
+                    <Button type="submit">
+                        <FontAwesomeStyling>
+                            <FontAwesomeIcon icon="save" />
+                        </FontAwesomeStyling>
+                    </Button>
+                </FormStyle>
+                <Button onClick={this.handleCancel}>Cancel</Button>
+            </EditCommentWrapper>
         );
     }
 }

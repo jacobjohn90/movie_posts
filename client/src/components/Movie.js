@@ -4,6 +4,10 @@ import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
 import { fetchCurrentUserEmail, fetchUsers } from '../util/FetchCurrentUser';
 import NewComment from './NewComment';
 import EditComment from './EditComment';
+import { MovieTextWrapper, MovieContentWrapper, MovieWrapper, CommentWrapper, TextWrapper } from '../styled/MovieWrapper';
+import Button from '../styled/ButtonStyle';
+import { FontAwesomeStyling } from '../styled/NavWrapper';
+import { FontAwesomeIcon } from '../../node_modules/@fortawesome/react-fontawesome';
 
 class Movie extends Component {
 
@@ -69,39 +73,51 @@ class Movie extends Component {
         const movie = this.state.movie
         const commentList = this.state.comments.map((comment) => {
             return (
-                <div key={comment.id}>
+                <CommentWrapper key={comment.id}>
                     {this.state.currentUserId === comment.user_id
                         ?
-                        <div>
+                        <TextWrapper>
                             {this.state.showEdit["show" + comment.id]
                                 ?
                                 <EditComment userId={this.state.currentUserId} fetchComments={this.fetchComments} {...this.props} currentComment={comment} hideEditForm={this.hideEditForm} />
                                 :
-                                <div>
+                                <TextWrapper>
                                     <p>{comment.content}</p>
-                                    <button onClick={() => this.handleUpdateShow(comment.id)}>Edit</button>
-                                </div>
+                                    <Button onClick={() => this.handleUpdateShow(comment.id)}>
+                                        <FontAwesomeStyling>
+                                            <FontAwesomeIcon icon="edit" />
+                                        </FontAwesomeStyling>
+                                    </Button>
+                                </TextWrapper>
                             }
-                            <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
-                        </div>
+                            <Button onClick={() => this.deleteComment(comment.id)}>
+                                <FontAwesomeStyling>
+                                    <FontAwesomeIcon icon="times-circle" />
+                                </FontAwesomeStyling>
+                            </Button>
+                        </TextWrapper>
                         :
                         <p>{comment.content}</p>
                     }
-                </div>
+                </CommentWrapper>
             )
         })
 
         return (
-            <div>
+            <MovieWrapper>
                 <div>
                     <h1>{movie.title}</h1>
-                    <img src={movie.img} alt="Movie Poster" />
-                    <p><strong>MPAA Rating: </strong> {movie.mpaa_rating}</p>
-                    <p><strong>Director(s): </strong>{movie.director}</p>
-                    <p><strong>Actor(s): </strong>{movie.actor}</p>
-                    <p><strong>Year: </strong>{movie.year}</p>
-                    <p><strong>IMDB Rating: </strong>{movie.rating}/10</p>
-                    <p> <strong>Description:</strong> {movie.summary}</p>
+                    <MovieContentWrapper>
+                        <img src={movie.img} alt="Movie Poster" />
+                        <MovieTextWrapper>
+                            <p><strong>MPAA rating</strong> : {movie.mpaa_rating}</p>
+                            <p><strong>Director(s)</strong> : {movie.director}</p>
+                            <p><strong>Actor(s)</strong> : {movie.actor}</p>
+                            <p><strong>Year</strong> : {movie.year}</p>
+                            <p><strong>IMDB Rating</strong> : {movie.rating}/10</p>
+                            <p> <strong>Description</strong> : {movie.summary}</p>
+                        </MovieTextWrapper>
+                    </MovieContentWrapper>
                 </div>
                 <div>
                     <h2>Comments about this Movie</h2>
@@ -113,7 +129,7 @@ class Movie extends Component {
                         null
                     }
                 </div>
-            </div>
+            </MovieWrapper>
         );
     }
 }

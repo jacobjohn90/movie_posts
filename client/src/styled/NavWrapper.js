@@ -6,22 +6,23 @@ const FontAwesomeStyling = styled.div`
     color: #d2d2d2;
     :hover{
         color: black;
-    }
+    };
     p{
         display: none;
         margin: 0;
         margin-right: 0.5rem;
-    }
+    };
     svg{
         font-size: 1rem;
-    }
+    };
     @media (min-width: 500px) {
         p{
             display: block;
-        }
+        };
     }
 `
 const NavWrapper = styled.div`
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;

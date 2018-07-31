@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Button from '../styled/ButtonStyle';
 
 class MovieSearch extends Component {
     state = {
@@ -77,7 +78,7 @@ class MovieSearch extends Component {
                     <div>
                         <textarea onChange={this.handleChange} name="searchField" value={this.state.searchField} />
                     </div>
-                    <button type="submit">Search Movie</button>
+                    <Button type="submit">Search Movie</Button>
                 </form>
                 <div>
                     {movieList}

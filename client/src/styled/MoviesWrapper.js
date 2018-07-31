@@ -28,7 +28,7 @@ a {
         bottom: 0;
         margin: 0;
         padding: 1rem 0 1rem;
-        background-color: rgba(0,0,0,0.6)
+        background-color: rgba(0,0,0,0.8)
     }
 }
 
