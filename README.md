@@ -15,7 +15,7 @@ Here's the Trello Board for Comment Reel: [Trello Board](https://trello.com/b/fs
 Here's the Wireframe for Comment Reel!
 <details>
   <summary>Click to expand</summary>
-  ![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")
+  <p>![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")</p>
 </details>
 <br>
 *The red objects in the wireframe are my reach goals, which I definitely plan on completing very soon!*
