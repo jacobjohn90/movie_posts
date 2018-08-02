@@ -13,9 +13,8 @@ Comment Reels can be found here: [Comment Reels](https://comment-reels.herokuapp
 
 Here's the Trello Board for Comment Reels: [Trello Board](https://trello.com/b/fseQS739/comment-reels "Trello Board")
 
-Here's the Wireframe for Comment Reels!
 <details>
-  <summary>Click to view Wireframe</summary>
+  <summary>Click here to view the Wireframe for Comment Reels!</summary>
   
   ![Wireframe for Comment Reels](https://i.imgur.com/zMJALQj.png "WireFrame")
   <br>
@@ -24,9 +23,8 @@ Here's the Wireframe for Comment Reels!
 </details>
 <br>
 
-Here's the ERD for Comment Reels!
 <details>
-  <summary>Click to view ERD</summary>
+  <summary>Click here to view the ERD for Comment Reels!</summary>
   
 ![ERD for Comment Reels](https://i.imgur.com/m7KL15z.png "ERD")
 <br>
