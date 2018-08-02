@@ -13,7 +13,10 @@ Comment Reel can be found here: [Comment Reel](https://comment-reels.herokuapp.c
 Here's the Trello Board for Comment Reel: [Trello Board](https://trello.com/b/fseQS739/comment-reel "Trello Board")
 
 Here's the Wireframe for Comment Reel!
-![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")
+<details>
+  <summary>Click to expand</summary>
+  ![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")
+</details>
 <br>
 *The red objects in the wireframe are my reach goals, which I definitely plan on completing very soon!*
 
