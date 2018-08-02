@@ -71,10 +71,18 @@ class MovieSearch extends Component {
 
         try {
             const res = await axios.post('/api/movies', payload)
-            const searchResults = []
-            const searchField = ''
-            this.setState({ addMovie: res.data, searchResults, searchField })
-            this.props.fetchMovies()
+            if (res.data.toString().includes('Title has already been taken')) {
+                swal({
+                    title: "Whoops!",
+                    text: "Looks like this movie is already listed!",
+                    icon: "warning",
+                })
+            } else {
+                const searchResults = []
+                const searchField = ''
+                this.setState({ addMovie: res.data, searchResults, searchField })
+                this.props.fetchMovies()
+            }
         } catch (error) {
             console.error(error);
         }

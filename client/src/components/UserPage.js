@@ -81,7 +81,7 @@ class UserPage extends Component {
             <UserPageWrapper>
                 <h1>{user.username}'s Info</h1>
                 <UserInfoStyle>
-                    <img src={user.image} alt={`${user.username}'s profile picture`} />
+                    <img src={user.image} alt={`${user.username}`} />
                     <UserTextStyle>
                         {this.state.showEdit.username
                             ?
