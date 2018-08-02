@@ -47,7 +47,7 @@ class SignUp extends Component {
                         </div>
                         <div>
                             <label htmlFor="username">Username: </label>
-                            <input onChange={this.onChange} type="text" name="username" value={this.state.email} />
+                            <input onChange={this.onChange} type="text" name="username" value={this.state.username} />
                         </div>
                         <div>
                             <label htmlFor="password">Password: </label>
