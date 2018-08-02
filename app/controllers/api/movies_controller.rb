@@ -5,8 +5,13 @@ class Api::MoviesController < ApplicationController
     end
 
     def create
-        @movie = Movie.create!(movie_params)
-        render json: @movie
+        @movie = Movie.new(movie_params)
+        if @movie.valid?
+            @movie.save!
+            render json: @movie
+        else
+            render json: @movie.errors.full_messages
+        end
     end
     
     def show

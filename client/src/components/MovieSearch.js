@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Button from '../styled/ButtonStyle';
+import swal from 'sweetalert';
 
 class MovieSearch extends Component {
     state = {
@@ -19,12 +20,28 @@ class MovieSearch extends Component {
         event.preventDefault()
         let search = this.state.searchField
         search = search.replace(' ', '+')
-        try {
-            const res = await axios.get(`/api/externals/10?s=${search}`)
-            this.setState({ searchResults: res.data.Search })
+        if (search.length > 0) {
+            try {
+                const res = await axios.get(`/api/externals/10?s=${search}`)
+                if (res.data.Error) {
+                    swal({
+                        icon: "warning",
+                        text: "No movie with this title could be found!"
+                    })
+                } else {
+                    this.setState({ searchResults: res.data.Search })
 
-        } catch (error) {
-            console.error(error);
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            swal({
+                title: "Uh-Oh",
+                icon: "error",
+                text: "Please enter a valid movie title"
+            })
         }
     }
 
@@ -42,7 +59,7 @@ class MovieSearch extends Component {
     sendToDb = async () => {
         const newMovie = this.state.addMovie
         const payload = {
-            'title':newMovie.Title,
+            'title': newMovie.Title,
             'mpaa_rating': newMovie.Rated,
             'img': newMovie.Poster,
             'summary': newMovie.Plot,
@@ -54,10 +71,18 @@ class MovieSearch extends Component {
 
         try {
             const res = await axios.post('/api/movies', payload)
-            const searchResults = []
-            const searchField = ''
-            this.setState({ addMovie: res.data, searchResults, searchField})
-            this.props.fetchMovies()
+            if (res.data.toString().includes('Title has already been taken')) {
+                swal({
+                    title: "Whoops!",
+                    text: "Looks like this movie is already listed!",
+                    icon: "warning",
+                })
+            } else {
+                const searchResults = []
+                const searchField = ''
+                this.setState({ addMovie: res.data, searchResults, searchField })
+                this.props.fetchMovies()
+            }
         } catch (error) {
             console.error(error);
         }
