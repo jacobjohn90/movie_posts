@@ -1,4 +1,4 @@
-[![Comment Reels Preview](https://i.imgur.com/JkPInYd.png](https://comment-reels.herokuapp.com/ "Comment Reels")
+[![Comment Reels Preview](https://i.imgur.com/JkPInYd.png](https://comment-reels.herokuapp.com/)
 # Comment Reels
 
 ## About Comment Reels
