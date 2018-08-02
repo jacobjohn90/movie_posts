@@ -22,8 +22,13 @@ class Api::CommentsController < ApplicationController
     def create
         @user = current_user
         @movie = Movie.find(params[:movie_id])
-        @comment = @movie.comments.create!(comment_params,)
-        render json: @comment
+        @comment = @movie.comments.new(comment_params,)
+        if @comment.valid?
+            @comment.save!
+            render json: @comment
+        else
+            render json: @comment.errors.full_messages
+        end
     end
 
     def update

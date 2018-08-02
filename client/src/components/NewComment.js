@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { setAxiosDefaults } from '../util/SessionHeaderUtil';
 import Button from '../styled/ButtonStyle';
+import swal from 'sweetalert';
+
 class NewComment extends Component {
 
     state = {
@@ -24,7 +26,14 @@ class NewComment extends Component {
         }
         try {
             setAxiosDefaults()
-            await axios.post(`/api/movies/${movieId}/comments`, payload)
+            const newComment = await axios.post(`/api/movies/${movieId}/comments`, payload)
+            if (newComment.data.toString().includes('Content cannot be blank')) {
+                swal({
+                    title: "Uh-oh",
+                    text: "Comment cannot be blank!",
+                    icon: "error",
+                })
+            }
             this.props.fetchComments()
             this.setState({content: ''})
         } catch (error) {
