@@ -29,6 +29,7 @@ class Movie extends Component {
         const signedIn = await userIsLoggedIn()
         this.setState({ movie, currentUserEmail, signedIn })
         this.fetchCurrentUserId()
+
     }
 
     fetchMovie = async () => {
@@ -46,7 +47,11 @@ class Movie extends Component {
     fetchCurrentUserId = async () => {
         const users = await fetchUsers()
         const currentUser = users.find((user) => user.email === this.state.currentUserEmail)
+        if (currentUser) {
         this.setState({ currentUserId: currentUser.id, users })
+        } else {
+            this.setState({users})
+        }
     }
 
 
