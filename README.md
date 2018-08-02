@@ -17,16 +17,19 @@ Here's the Wireframe for Comment Reel!
   <summary>Click to expand</summary>
   
   ![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")
-  
+  *The red objects in the wireframe are my reach goals, which I definitely plan on completing very soon!*
+
 </details>
 <br>
-*The red objects in the wireframe are my reach goals, which I definitely plan on completing very soon!*
 
 Here's the ERD for Comment Reel!
-<br>
+<details>
+  <summary>Click to view ERD</summary>
+  
 ![ERD for Comment Reel](https://i.imgur.com/m7KL15z.png "ERD")
-<br>
 *The red Twitter Model is a stretch goal, which I am planning on completing very soon!*
+
+</details>
 
 #### Technologies/Libraries Used
 * HTML5
