@@ -14,9 +14,10 @@ Here's the Trello Board for Comment Reel: [Trello Board](https://trello.com/b/fs
 
 Here's the Wireframe for Comment Reel!
 <details>
-  <summary>Click to expand</summary>
+  <summary>Click to view Wireframe</summary>
   
   ![Wireframe for Comment Reel](https://i.imgur.com/zMJALQj.png "WireFrame")
+  <br>
   *The red objects in the wireframe are my reach goals, which I definitely plan on completing very soon!*
 
 </details>
@@ -27,6 +28,7 @@ Here's the ERD for Comment Reel!
   <summary>Click to view ERD</summary>
   
 ![ERD for Comment Reel](https://i.imgur.com/m7KL15z.png "ERD")
+<br>
 *The red Twitter Model is a stretch goal, which I am planning on completing very soon!*
 
 </details>
