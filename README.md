@@ -7,6 +7,7 @@ This is my fist official React on Rails stack application! Comment Reels is a mo
 
 ## Comment Reels
 Comment Reels can be found here: [Comment Reels](https://comment-reels.herokuapp.com/ "Comment Reels")
+*The dummy account is test@tester.com with a password of testtest.*
 
 
 ### The Knitty Gritty
