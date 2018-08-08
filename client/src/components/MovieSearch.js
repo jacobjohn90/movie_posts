@@ -49,7 +49,7 @@ class MovieSearch extends Component {
         const movie = this.state.searchResults[index]
 
         try {
-            const res = await axios.get(`/api/externals/1?t=${movie.Title}`)
+            const res = await axios.get(`/api/externals/1?i=${movie.imdbID}`)
             this.setState({ addMovie: res.data })
             this.sendToDb()
         } catch (error) {

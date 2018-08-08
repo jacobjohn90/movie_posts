@@ -8,7 +8,7 @@ class Api::ExternalsController < ApplicationController
     end
 
     def search1
-        res = HTTParty.get("http://www.omdbapi.com/?apikey=#{Figaro.env.api_key}&t=#{params[:t]}&plot=full")
+        res = HTTParty.get("http://www.omdbapi.com/?apikey=#{Figaro.env.api_key}&i=#{params[:i]}&plot=full")
         render json: res
     end
 end

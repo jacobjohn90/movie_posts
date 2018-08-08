@@ -51,7 +51,7 @@ const MovieSearchStyle = styled.div`
     text-align: center;
     width: 40vw;
     max-height: 80vh;
-    overflow: auto;
+    overflow: scroll;
     background-color: #182433;
 
 `

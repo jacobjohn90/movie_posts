@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_140821) do
+ActiveRecord::Schema.define(version: 2018_08_08_164114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_140821) do
     t.decimal "rating"
     t.string "director"
     t.integer "year"
+    t.index ["title", "director", "year"], name: "index_movies_on_title_and_director_and_year", unique: true
   end
 
   create_table "users", force: :cascade do |t|
