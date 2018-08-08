@@ -68,26 +68,26 @@ class MovieSearch extends Component {
             'year': newMovie.Year,
             'rating': newMovie.imdbRating
         }
-        
+
         console.log(payload)
 
-        // try {
-        //     const res = await axios.post('/api/movies', payload)
-        //     if (res.data.toString().includes('Title has already been taken')) {
-        //         swal({
-        //             title: "Whoops!",
-        //             text: "Looks like this movie is already listed!",
-        //             icon: "warning",
-        //         })
-        //     } else {
-        //         const searchResults = []
-        //         const searchField = ''
-        //         this.setState({ addMovie: res.data, searchResults, searchField })
-        //         this.props.fetchMovies()
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        try {
+            const res = await axios.post('/api/movies', payload)
+            if (res.data.toString().includes('Title has already been taken')) {
+                swal({
+                    title: "Whoops!",
+                    text: "Looks like this movie is already listed!",
+                    icon: "warning",
+                })
+            } else {
+                const searchResults = []
+                const searchField = ''
+                this.setState({ addMovie: res.data, searchResults, searchField })
+                this.props.fetchMovies()
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     render() {
