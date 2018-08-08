@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { setAxiosDefaults, userIsLoggedIn } from '../util/SessionHeaderUtil';
+import swal from 'sweetalert';
+
 import EditUsername from './EditUsername';
 import EditEmail from './EditEmail';
 import EditPassword from './EditPassword';
@@ -59,9 +61,16 @@ class UserPage extends Component {
         }
     }
     handleUpdateShow = (input) => {
-        const showEdit = { ...this.state.showEdit }
-        showEdit[input] = !showEdit[input]
-        this.setState({ showEdit })
+        if ((input === 'email' || input === 'password') && this.state.user.email === "test@tester.com") {
+            swal({
+                icon: "error",
+                text: "This is the test user, thus changing the email/password is not permitted"
+            })
+        } else {
+            const showEdit = { ...this.state.showEdit }
+            showEdit[input] = !showEdit[input]
+            this.setState({ showEdit })
+        }
     }
     updateUser = (user) => {
         this.setState({ user })
