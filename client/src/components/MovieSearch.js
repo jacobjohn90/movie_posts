@@ -69,8 +69,6 @@ class MovieSearch extends Component {
             'rating': newMovie.imdbRating
         }
 
-        console.log(payload)
-
         try {
             const res = await axios.post('/api/movies', payload)
             if (res.data.toString().includes('Title has already been taken')) {
